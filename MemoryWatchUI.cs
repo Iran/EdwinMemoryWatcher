@@ -15,6 +15,7 @@ namespace EdwinMemoryWatcher
     {
         MainManager mainManager;
         int CurrentPage = -1;
+        const int HEAP_ENTRY_SIZE = 0x11BE0;
 
         public MemoryWatchUI()
         {
@@ -32,7 +33,7 @@ namespace EdwinMemoryWatcher
             OutputTextBoxRefreshTimer.Enabled = true;
             OutputTextBoxRefreshTimer.Interval = 40;
 
-            SetCurrentPage(0);
+            SetCurrentPageToPlayerHouse();
         }
 
         // Fix stupid flickering
@@ -58,33 +59,70 @@ namespace EdwinMemoryWatcher
             labelCurrentPage.Text = "" + CurrentPage;
         }
 
+        private void SetCurrentPageToPlayerHouse()
+        {
+            int PtrDiff = mainManager.GetPlayerPtrOffset() - mainManager.GetMemoryOffset();
+            SetCurrentPage(PtrDiff / HEAP_ENTRY_SIZE);
+        }
+
         private void SetMemoryBytesTextBoxOutput()
         {
+            mainManager.SetAdJustedOffset(this.CurrentPage * HEAP_ENTRY_SIZE);
             mainManager.UpdateMemoryBytes();
             byte[] mb = mainManager.GetMemoryBytes();
+
+            int AIDiff = mb[0x9];
+
+            int Unknown01 = mb[0x41];
 
             bool IsActive = (mb[0x42] & 1) != 0;
             bool IsHuman = (mb[0x42] & 2) != 0;
             bool IsPlayerCtrl = (mb[0x42] & 4) != 0;
+            bool ProductionStarted = (mb[0x42] & 8) != 0;
+            bool Bit_16 = (mb[0x42] & 16) != 0;         //TriggersAreActive?
+            bool Bit_32 = (mb[0x42] & 32) != 0;          //AutoBaseAI?
+            bool Discovered = (mb[0x42] & 64) != 0;
+            bool MaxCapacity = (mb[0x42] & 128) != 0;
 
+            bool Defeated = (mb[0x43] & 1) != 0;
             bool ToDie = (mb[0x43] & 2) != 0;
             bool ToWin = (mb[0x43] & 4) != 0;
             bool ToLose = (mb[0x43] & 8) != 0;
+            bool CivEvac = (mb[0x43] & 16) != 0;
+            bool RecalcNeeded = (mb[0x43] & 32) != 0;
+            bool Visionary = (mb[0x43] & 64) != 0;
+            bool Bit2_128 = (mb[0x43] & 128) != 0;          //LowOre?
 
-            bool Thieved = (mb[0x43] & 2) != 0;
+            bool Bit3_1 = (mb[0x44] & 1) != 0;          //Spied?
+            bool Thieved = (mb[0x44] & 2) != 0;
+            bool Bit3_4 = (mb[0x44] & 4) != 0;
+            bool Bit3_8 = (mb[0x44] & 8) != 0;           //GPSActive?
+            bool Bit3_16 = (mb[0x44] & 16) != 0;        //Production?
+            bool Bit3_32 = (mb[0x44] & 32) != 0;        //Resigned?
+            bool Bit3_64 = (mb[0x44] & 64) != 0;        //GaveUp?
+            bool Paranoid = (mb[0x44] & 128) != 0;
+
+            bool Bit4_1 = (mb[0x44] & 128) != 0;
 
             int CurrentIQ = BitConverter.ToInt32(mb, 0x46); // ALSO KNOWN AS 'Smarties'
 
-            int Struct = mb[0x113];
-            int Infantry = mb[0x114];
-            int Unit = mb[0x115];
-            int Aircraft = mb[0x116];
+            int Urgency = BitConverter.ToInt32(mb, 0x4A);
+
+            int JustStruct = mb[0x113];
+            int JustInfantry = mb[0x114];
+            int JustUnit = mb[0x115];
+            int JustAircraft = mb[0x116];
+
             int Blocks = BitConverter.ToInt32(mb, 0x118);
+
+            int field_173 = BitConverter.ToInt32(mb, 0x173);       	//Spent?
+            int field_177 = BitConverter.ToInt32(mb, 0x177);		//Harvested?
+            int field_17B = BitConverter.ToInt32(mb, 0x17B);		//Stolen?
 
             int Power = BitConverter.ToInt32(mb, 0x1E3);
             int Drain = BitConverter.ToInt32(mb, 0x1E7);
 
-            int BuildingsLost = BitConverter.ToInt32(mb, 0x2a9);
+            int BuildingsLost = BitConverter.ToInt32(mb, 0x2A9);
             int UnitsLost = BitConverter.ToInt32(mb, 0x255);
 
             int Radius = BitConverter.ToInt32(mb, 0x2B2);

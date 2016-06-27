@@ -14,8 +14,11 @@ namespace EdwinMemoryWatcher
         byte[] MemBytes;
         int MemoryOffset = -1;
         int AdjustedOffset = 0;
-        const int PLAYER_PTR_ADDRESS = 0X00668958;
+        const int PLAYER_PTR_ADDRESS = 0x00668958;
         const int HOUSECLASS_SIZE = 0x17A8;
+        const int HOUSECLASS_HEAP_ADDRESS = 0x0065C994;
+        const int HOUSECLASS_HEAP_OFFSET_Pointer = 0x10;
+        int PlayerPtrOffset = -1;
 
         public MainManager()
         {
@@ -41,22 +44,36 @@ namespace EdwinMemoryWatcher
 
         private void LoadMemoryBytes()
         {
-            this.MemBytes = this.ProcMem.ReadMem(this.MemoryOffset + AdjustedOffset, HOUSECLASS_SIZE, false);
+            this.MemBytes = this.ProcMem.ReadMem(this.MemoryOffset + this.AdjustedOffset, HOUSECLASS_SIZE, false);
         }
 
         public void SetAdJustedOffset(int offset)
         {
             this.AdjustedOffset = offset;
         }
+        
+        public int GetPlayerPtrOffset()
+        {
+            return this.PlayerPtrOffset;
+        }
+
+        public int GetMemoryOffset()
+        {
+            return this.MemoryOffset;
+        }
 
         private void LoadMemoryOffset()
         {
-            byte[] MemB = this.ProcMem.ReadMem(PLAYER_PTR_ADDRESS, 0x4, false); // read 32-bit pointer to HouseClass
+            byte[] MemB = this.ProcMem.ReadMem(PLAYER_PTR_ADDRESS, 0x4, false); // read 32-bit pointer to HouseClass 
+            this.PlayerPtrOffset = BitConverter.ToInt32(MemB, 0);
+
+            byte[] MemB2 = this.ProcMem.ReadMem(HOUSECLASS_HEAP_ADDRESS + HOUSECLASS_HEAP_OFFSET_Pointer, 
+                0x4, false); // read 32-bit pointer to HouseClass 
+            this.MemoryOffset = BitConverter.ToInt32(MemB2, 0);
 
 
-            this.MemoryOffset = BitConverter.ToInt32(MemB, 0);
 
- //           MessageBox.Show(this.MemoryOffset.ToString());
+            //           MessageBox.Show(this.MemoryOffset.ToString());
 
             return;
 
