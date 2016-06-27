@@ -73,17 +73,31 @@ namespace EdwinMemoryWatcher
 
             bool Thieved = (mb[0x43] & 2) != 0;
 
-            int CurrentIQ = BitConverter.ToInt32(mb, 0x46);
+            int CurrentIQ = BitConverter.ToInt32(mb, 0x46); // ALSO KNOWN AS 'Smarties'
+
+            int Struct = mb[0x113];
+            int Infantry = mb[0x114];
+            int Unit = mb[0x115];
+            int Aircraft = mb[0x116];
             int Blocks = BitConverter.ToInt32(mb, 0x118);
 
             int Power = BitConverter.ToInt32(mb, 0x1E3);
             int Drain = BitConverter.ToInt32(mb, 0x1E7);
 
-            String s = String.Format("IsActive: {0}\r\n"
-                + "Drain: {1}\r\n"
-                + "Power: {2}\r\n"
+            int BuildingsLost = BitConverter.ToInt32(mb, 0x2a9);
+            int UnitsLost = BitConverter.ToInt32(mb, 0x255);
+
+            int Radius = BitConverter.ToInt32(mb, 0x2B2);
+            int CenterCell = BitConverter.ToInt32(mb, 0x2AE);
+
+            String Name = System.Text.Encoding.UTF8.GetString(mb, 0x001790, 12).Trim('\0');
+
+            String s = String.Format("Name: {0}\r\n"
+                + "IsActive: {1}\r\n"
+                + "Drain: {2}\r\n"
+                + "Power: {3}\r\n"
                 
-                , IsActive, Drain, Power
+                , Name, IsActive, Drain, Power
                 
                 
                 );

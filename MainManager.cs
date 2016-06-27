@@ -56,12 +56,12 @@ namespace EdwinMemoryWatcher
 
             this.MemoryOffset = BitConverter.ToInt32(MemB, 0);
 
-            MessageBox.Show(this.MemoryOffset.ToString());
+ //           MessageBox.Show(this.MemoryOffset.ToString());
 
             return;
 
-            MessageBox.Show("Can't find PlayerPtr offset, shutting down");
-            Environment.Exit(-1);
+//            MessageBox.Show("Can't find PlayerPtr offset, shutting down");
+//            Environment.Exit(-1);
         }
 
         private void LoadProcessMemory()
