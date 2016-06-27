@@ -130,84 +130,91 @@ namespace EdwinMemoryWatcher
 
             int Tiberium = BitConverter.ToInt32(mb, 0x193);
             int Credits = BitConverter.ToInt32(mb, 0x197);
-            int Cap = BitConverter.ToInt32(mb, 0x19B);
+            int Capacity = BitConverter.ToInt32(mb, 0x19B);
 
             String Name = System.Text.Encoding.UTF8.GetString(mb, 0x001790, 12).Trim('\0');
 
             String s = String.Format(
-      "Name: {0}\t\r\n"
+    "Name: {0}\t\r\n"
 
-      + "AIDiff: {1}\t\t\tParanoid: {25}\t\r\n"
+    + "AIDiff: {1}\t\t\tParanoid: {25}\t\r\n"
 
-      + "IsActive: {2}\t\t\tBit4_1: {26}\t\r\n"
-      + "IsHuman: {3}\t\t\tCurrentIQ: {27}\r\n"
-      + "IsPlayerCtrl: {4}\t\tUrgency: {28}\r\n"
-      + "ProductionStarted: {5}\tJustStruct: {29}\r\n"
-      + "Bit_16: {6}\t\t\tJustInfantry: {30}\r\n"
-      + "Bit_32: {7}\t\t\tJustUnit: {31}\r\n"
-      + "Discovered: {8}\t\tJustAircraft: {32}\r\n"
-      + "MaxCapacity: {9}\t\tBlocks: {33}\r\n"
-      + "Defeated: {10}\t\t\tfield_173: {34}\r\n"
-      + "ToDie: {11}\t\t\tfield_177: {35}\r\n"
-      + "ToWin: {12}\t\t\tfield_17B: {36}\r\n"
-      + "ToLose: {13}\t\r\n"
-      + "CivEvac: {14}\t\r\n"
-      + "RecalcNeeded: {15}\t\r\n"
-      + "Visionary: {16}\t\r\n"
-      + "Bit2_128: {17}\t\r\n"
-      + "Bit3_1: {18}\t\r\n"
-      + "Thieved: {19}\t\r\n"
-      + "Bit3_4: {20}\t\r\n"
-      + "Bit3_8: {21}\t\r\n"
-      + "Bit3_16: {22}\t\r\n"
-      + "Bit3_32: {23}\t\r\n"
-      + "Bit3_64: {24}\t\r\n",
+    + "IsActive: {2}\t\t\tBit4_1: {26}\t\r\n"
+    + "IsHuman: {3}\t\t\tCurrentIQ: {27}\r\n"
+    + "IsPlayerCtrl: {4}\t\tUrgency: {28}\r\n"
+    + "ProductionStarted: {5}\tJustStruct: {29}\r\n"
+    + "Bit_16: {6}\t\t\tJustInfantry: {30}\r\n"
+    + "Bit_32: {7}\t\t\tJustUnit: {31}\r\n"
+    + "Discovered: {8}\t\tJustAircraft: {32}\r\n"
+    + "MaxCapacity: {9}\t\tBlocks: {33}\r\n"
+    + "Defeated: {10}\t\t\tfield_173: {34}\r\n"
+    + "ToDie: {11}\t\t\tfield_177: {35}\r\n"
+    + "ToWin: {12}\t\t\tfield_17B: {36}\r\n"
+    + "ToLose: {13}\t\t\tPower: {37}\r\n"
+    + "CivEvac: {14}\t\t\tDrain: {38}\r\n"
+    + "RecalcNeeded: {15}\t\tTiberium: {39}\r\n"
+    + "Visionary: {16}\t\tCredits: {40}\r\n"
+    + "Bit2_128: {17}\t\tCapacity: {41}\r\n"
+    + "Bit3_1: {18}\t\r\n"
+    + "Thieved: {19}\t\r\n"
+    + "Bit3_4: {20}\t\r\n"
+    + "Bit3_8: {21}\t\r\n"
+    + "Bit3_16: {22}\t\r\n"
+    + "Bit3_32: {23}\t\r\n"
+    + "Bit3_64: {24}\t\r\n",
 
-      Name,
+    Name,
 
-      AIDiff,
+    AIDiff,
 
-      IsActive,
-      IsHuman,
-      IsPlayerCtrl,
-      ProductionStarted,
-      Bit_16,
-      Bit_32,
-      Discovered,
-      MaxCapacity,
-      Defeated,
-      ToDie,
-      ToWin,
-      ToLose,
-      CivEvac,
-      RecalcNeeded,
-      Visionary,
-      Bit2_128,
-      Bit3_1,
-      Thieved,
-      Bit3_4,
-      Bit3_8,
-      Bit3_16,
-      Bit3_32,
-      Bit3_64,
-      Paranoid,
-      Bit4_1,
+    IsActive,
+    IsHuman,
+    IsPlayerCtrl,
+    ProductionStarted,
+    Bit_16,
+    Bit_32,
+    Discovered,
+    MaxCapacity,
+    Defeated,
+    ToDie,
+    ToWin,
+    ToLose,
+    CivEvac,
+    RecalcNeeded,
+    Visionary,
+    Bit2_128,
+    Bit3_1,
+    Thieved,
+    Bit3_4,
+    Bit3_8,
+    Bit3_16,
+    Bit3_32,
+    Bit3_64,
+    Paranoid,
+    Bit4_1,
 
-      CurrentIQ,
-      Urgency,
+    CurrentIQ,
+    Urgency,
 
-      JustStruct,
-      JustInfantry,
-      JustUnit,
-      JustAircraft,
+    JustStruct,
+    JustInfantry,
+    JustUnit,
+    JustAircraft,
 
-      Blocks,
+    Blocks,
 
-      field_173,
-      field_177,
-      field_17B
+    field_173,
+    field_177,
+    field_17B,
 
-      );
+    Power,
+    Drain,
+
+    Tiberium,
+    Credits,
+    Capacity
+
+    );
 
             textBoxOutput.Text = s;
         }
