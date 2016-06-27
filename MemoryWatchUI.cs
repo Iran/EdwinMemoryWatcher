@@ -134,6 +134,7 @@ namespace EdwinMemoryWatcher
 
             String Name = System.Text.Encoding.UTF8.GetString(mb, 0x001790, 12).Trim('\0');
 
+            int Frame = BitConverter.ToInt32(mainManager.GetFrameMemoryBytes(), 0);
             String s = String.Format(
     "Name: {0}\t\r\n"
 
@@ -155,7 +156,7 @@ namespace EdwinMemoryWatcher
     + "RecalcNeeded: {15}\t\tTiberium: {39}\r\n"
     + "Visionary: {16}\t\tCredits: {40}\r\n"
     + "Bit2_128: {17}\t\tCapacity: {41}\r\n"
-    + "Bit3_1: {18}\t\r\n"
+    + "Bit3_1: {18}\t\tFrame: {42}\t\r\n"
     + "Thieved: {19}\t\r\n"
     + "Bit3_4: {20}\t\r\n"
     + "Bit3_8: {21}\t\r\n"
@@ -212,8 +213,8 @@ namespace EdwinMemoryWatcher
 
     Tiberium,
     Credits,
-    Capacity
-
+    Capacity,
+    Frame
     );
 
             textBoxOutput.Text = s;

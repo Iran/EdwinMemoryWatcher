@@ -12,6 +12,7 @@ namespace EdwinMemoryWatcher
     {
         ProcessMemory ProcMem;
         byte[] MemBytes;
+        byte[] FrameMemBytes;
         int MemoryOffset = -1;
         int AdjustedOffset = 0;
         const int PLAYER_PTR_ADDRESS = 0x00668958;
@@ -45,6 +46,12 @@ namespace EdwinMemoryWatcher
         private void LoadMemoryBytes()
         {
             this.MemBytes = this.ProcMem.ReadMem(this.MemoryOffset + this.AdjustedOffset, HOUSECLASS_SIZE, false);
+            this.FrameMemBytes = this.ProcMem.ReadMem(0x06670C4, 4/*sizeof(int32)*/, false);
+        }
+
+        public byte[] GetFrameMemoryBytes()
+        {
+            return this.FrameMemBytes;
         }
 
         public void SetAdJustedOffset(int offset)
