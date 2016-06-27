@@ -108,10 +108,10 @@ namespace EdwinMemoryWatcher
 
             int Urgency = BitConverter.ToInt32(mb, 0x4A);
 
-            int JustStruct = mb[0x113];
-            int JustInfantry = mb[0x114];
-            int JustUnit = mb[0x115];
-            int JustAircraft = mb[0x116];
+            byte JustStruct = mb[0x113];
+            byte JustInfantry = mb[0x114];
+            byte JustUnit = mb[0x115];
+            byte JustAircraft = mb[0x116];
 
             int Blocks = BitConverter.ToInt32(mb, 0x118);
 
@@ -127,6 +127,10 @@ namespace EdwinMemoryWatcher
 
             int Radius = BitConverter.ToInt32(mb, 0x2B2);
             int CenterCell = BitConverter.ToInt32(mb, 0x2AE);
+
+            int Tiberium = BitConverter.ToInt32(mb, 0x193);
+            int Credits = BitConverter.ToInt32(mb, 0x197);
+            int Cap = BitConverter.ToInt32(mb, 0x19B);
 
             String Name = System.Text.Encoding.UTF8.GetString(mb, 0x001790, 12).Trim('\0');
 
