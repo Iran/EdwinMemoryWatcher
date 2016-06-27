@@ -134,15 +134,68 @@ namespace EdwinMemoryWatcher
 
             String Name = System.Text.Encoding.UTF8.GetString(mb, 0x001790, 12).Trim('\0');
 
-            String s = String.Format("Name: {0}\r\n"
-                + "IsActive: {1}\r\n"
-                + "Drain: {2}\r\n"
-                + "Power: {3}\r\n"
-                
-                , Name, IsActive, Drain, Power
-                
-                
-                );
+            String s = String.Format(
+                            "Name: {0}\t\r\n"
+
+                            + "AIDiff: {1}\t\r\n"
+
+                            + "IsActive: {2}\t\r\n"
+                            + "IsHuman: {3}\t\r\n"
+                            + "IsPlayerCtrl: {4}\t\r\n"
+                            + "ProductionStarted: {5}\t\r\n"
+                            + "Bit_16: {6}\t\r\n"
+                            + "Bit_32: {7}\t\r\n"
+                            + "Discovered: {8}\t\r\n"
+                            + "MaxCapacity: {9}\t\r\n"
+                            + "Defeated: {10}\t\r\n"
+                            + "ToDie: {11}\t\r\n"
+                            + "ToWin: {12}\t\r\n"
+                            + "ToLose: {13}\t\r\n"
+                            + "CivEvac: {14}\t\r\n"
+                            + "RecalcNeeded: {15}\t\r\n"
+                            + "Visionary: {16}\t\r\n"
+                            + "Bit2_128: {17}\t\r\n"
+                            + "Bit3_1: {18}\t\r\n"
+                            + "Thieved: {19}\t\r\n"
+                            + "Bit3_4: {20}\t\r\n"
+                            + "Bit3_8: {21}\t\r\n"
+                            + "Bit3_16: {22}\t\r\n"
+                            + "Bit3_32: {23}\t\r\n"
+                            + "Bit3_64: {24}\t\r\n"
+                            + "Paranoid: {25}\t\r\n"
+                            + "Bit4_1: {26}\t\r\n",
+
+                            Name,
+
+                            AIDiff,
+
+                            IsActive,
+                            IsHuman,
+                            IsPlayerCtrl,
+                            ProductionStarted,
+                            Bit_16,
+                            Bit_32,
+                            Discovered,
+                            MaxCapacity,
+                            Defeated,
+                            ToDie,
+                            ToWin,
+                            ToLose,
+                            CivEvac,
+                            RecalcNeeded,
+                            Visionary,
+                            Bit2_128,
+                            Bit3_1,
+                            Thieved,
+                            Bit3_4,
+                            Bit3_8,
+                            Bit3_16,
+                            Bit3_32,
+                            Bit3_64,
+                            Paranoid,
+                            Bit4_1
+
+                            );
 
             textBoxOutput.Text = s;
         }
