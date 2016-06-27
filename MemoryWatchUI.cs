@@ -15,7 +15,7 @@ namespace EdwinMemoryWatcher
     {
         MainManager mainManager;
         int CurrentPage = -1;
-        const int HEAP_ENTRY_SIZE = 0x11BE0;
+        const int HEAP_ENTRY_SIZE = 0x17A8;
 
         public MemoryWatchUI()
         {

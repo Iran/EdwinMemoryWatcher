@@ -83,7 +83,7 @@ namespace EdwinMemoryWatcher
 
         private void LoadProcessMemory()
         {
-            this.ProcMem = new ProcessMemory("ra95");
+            this.ProcMem = new ProcessMemory("ra95_300");
             if (!this.ProcMem.OpenProcess())
             {
                 Environment.Exit(-1);
